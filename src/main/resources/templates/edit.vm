@@ -1,0 +1,13 @@
+#customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
+    $webResourceManager.requireResourcesForContext("rating-plugin")
+    #foreach ($option in $configs.options)
+        #if(!$option.disabled || $option.disabled == false || ($value && $value == $option.optionId.toString()))
+            #if ($value && $value.equals($option.optionId.toString())) #set ($checked = ' checked="checked"') #else #set ($checked = '') #end
+            <input$!{checked} class="radio-rating" id="${customField.id}-${velocityCount}" name="${customField.id}" type="radio" value="$option.optionId" />
+        #end
+    #end
+    <script type="text/javascript">
+        rating_${customField.id} = jQuery('input[name=${customField.id}]');
+        rating_${customField.id}.rating();
+    </script>
+#customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)
