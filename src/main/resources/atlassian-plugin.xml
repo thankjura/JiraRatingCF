@@ -5,6 +5,13 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <!-- Support for the following marketing assets has been implemented -->
+        <param name="plugin-icon">images/IconSmall.gif</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+        <!-- Support for the following marketing assets will be implemented soon -->
+        <param name="plugin-banner">images/pluginBanner.png</param>
+        <param name="vendor-icon">images/IconSmall.gif</param>
+        <param name="vendor-logo">images/Icon.png</param>
     </plugin-info>
     <resource type="i18n" name="i18n" location="ru.slie.plugins.customfield"/>
     <customfield-type name="Rating Custom Field" i18n-name-key="rating-custom-field.name" key="rating-custom-field" class="ru.slie.jira.plugins.customfields.RatingCustomField">
