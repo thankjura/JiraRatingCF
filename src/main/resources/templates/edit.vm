@@ -3,7 +3,7 @@
     #foreach ($option in $configs.options)
         #if(!$option.disabled || $option.disabled == false || ($value && $value == $option.optionId.toString()))
             #if ($value && $value.equals($option.optionId.toString())) #set ($checked = ' checked="checked"') #else #set ($checked = '') #end
-            <input$!{checked} class="radio-rating" id="${customField.id}-${velocityCount}" name="${customField.id}" type="radio" value="$option.optionId" />
+            <input$!{checked} class="radio-rating" id="${customField.id}-${velocityCount}" name="${customField.id}" type="radio" value="$option.optionId" title="$cfValueEncoder.encodeForHtml($option.value)" />
         #end
     #end
     <script type="text/javascript">
