@@ -17,6 +17,7 @@
         <description key="rating-custom-field.description">The Rating Custom Field Plugin</description>
         <resource type="velocity" name="view" location="templates/view.vm"/>
         <resource type="velocity" name="column-view" location="templates/view.vm"/>
+        <resource type="velocity" name="xml" location="templates/xml.vm"/>
         <resource type="velocity" name="edit" location="templates/edit.vm"/>
     </customfield-type>
   

@@ -1,22 +1,24 @@
-#if ($options)
-    $webResourceManager.requireResourcesForContext("rating-plugin")
-    #foreach ($option in $options)
-        #if(!$option.disabled || $option.disabled == false || ($value && $value == $option.optionId.toString()))
-            #if ($value && $cfValueEncoder.encodeForHtml($value) == $cfValueEncoder.encodeForHtml($option.value))
-                #set ($checked = ' checked="checked"')
-            #else
-                #set ($checked = '')
+#if ($value)
+    #if (${displayParameters.excel_view})
+        $textutils.br($textutils.htmlEncode($!value.getValue(), false))
+    #elseif ($options)
+        $webResourceManager.requireResourcesForContext("rating-plugin")
+        #foreach ($option in $options)
+            #if(!$option.disabled || $option.disabled == false || ($value && $value == $option.optionId.toString()))
+                #if ($value && $cfValueEncoder.encodeForHtml($value) == $cfValueEncoder.encodeForHtml($option.value))
+                    #set ($checked = ' checked="checked"')
+                #else
+                    #set ($checked = '')
+                #end
+                <input$!{checked} class="radio" id="${customField.id}-${velocityCount}" name="${customField.id}" type="radio" value="$cfValueEncoder.encodeForHtml($option.value)"/>
             #end
-            <input$!{checked} class="radio" id="${customField.id}-${velocityCount}" name="${customField.id}" type="radio" value="$cfValueEncoder.encodeForHtml($option.value)"/>
         #end
-    #end
-    <script type="text/javascript">
-        rating_${customField.id} = jQuery('input[name=${customField.id}]');
-        rating_${customField.id}.rating();
-        rating_${customField.id}.rating('disable');
-    </script>
-#else
-    #if ($value)
-        $cfValueEncoder.encodeForHtml($!value.toString())
+        <script type="text/javascript">
+            rating_${customField.id} = jQuery('input[name=${customField.id}]');
+            rating_${customField.id}.rating();
+            rating_${customField.id}.rating('disable');
+        </script>
+    #else
+        $cfValueEncoder.encodeForHtml($!value.getValue())
     #end
 #end
