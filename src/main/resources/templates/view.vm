@@ -4,13 +4,13 @@
     #elseif ($options)
         $webResourceManager.requireResourcesForContext("rating-plugin")
         #foreach ($option in $options)
-            #if(!$option.disabled || $option.disabled == false || ($value && $value == $option.optionId.toString()))
-                #if ($value && $cfValueEncoder.encodeForHtml($value) == $cfValueEncoder.encodeForHtml($option.value))
+            #if(!$option.disabled || $option.disabled == false)
+                #if ($value && $value.toString() == $option.value.toString())
                     #set ($checked = ' checked="checked"')
                 #else
                     #set ($checked = '')
                 #end
-                <input$!{checked} class="radio" id="${customField.id}-${velocityCount}" name="${customField.id}" type="radio" value="$cfValueEncoder.encodeForHtml($option.value)"/>
+                <input$!{checked} class="radio" id="${customField.id}-${velocityCount}" name="${customField.id}" type="radio" value="$textutils.htmlEncode($option.value)"/>
             #end
         #end
         <script type="text/javascript">
@@ -19,6 +19,6 @@
             rating_${customField.id}.rating('disable');
         </script>
     #else
-        $cfValueEncoder.encodeForHtml($!value.getValue())
+        $textutils.htmlEncode($!value.getValue())
     #end
 #end
