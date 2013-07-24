@@ -1,0 +1,10 @@
+.project
+.idea
+.classpath
+.settings/
+customfield.iml
+target/classes/
+target/container/
+target/dependency-maven-plugin-markers/
+target/jira/
+target/maven-archiver/
