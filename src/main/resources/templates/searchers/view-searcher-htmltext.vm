@@ -1,0 +1,4 @@
+#searcherHeader ($customField)
+#if ($valueObject)
+    $cfValueEncoder.encodeForHtml($!valueObject.toString())
+#end

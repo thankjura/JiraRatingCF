@@ -87,7 +87,6 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
         this.optionsManager = optionsManager;
         this.jiraBaseUrls = jiraBaseUrls;
         projectCustomFieldImporter = new SelectCustomFieldImporter();
-        log.info("Constructor создан");
     }
 
     /**
@@ -446,7 +445,7 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
 
                 @Override
                 public List<Option> getChildOptions() {
-                    throw new UnsupportedOperationException("Not supported yet.");
+                    return null;
                 }
 
                 @Override
