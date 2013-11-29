@@ -3,21 +3,32 @@
         $textutils.br($textutils.htmlEncode($!value.getValue(), false))
     #elseif ($options)
         $webResourceManager.requireResourcesForContext("rating-plugin")
-        #foreach ($option in $options)
-            #if(!$option.disabled || $option.disabled == false)
+        <style>
+            div.star-rating {float:left;width:17px;height:15px;text-indent:-999em;cursor:pointer;display:block;background:transparent;overflow:hidden}
+            div.star-rating,div.star-rating a {background:url("$req.contextPath/download/resources/ru.slie.jira.plugins.customfield:resources/star.gif") no-repeat 0 0px}
+            div.star-rating a {display:block;width:16px;height:100%;background-position:0 0px;border:0}
+            div.star-rating-on a {background-position:0 -16px!important}
+            div.star-rating-readonly a {cursor:default !important}
+            div.star-rating {background:transparent!important;overflow:hidden!important}
+        </style>
+        <span class="star-rating-readonly">
+            #set ($attr_start = "")
+            #foreach ($option in $options)
                 #if ($value && $value.toString() == $option.value.toString())
-                    #set ($checked = ' checked="checked"')
-                #else
-                    #set ($checked = '')
+                #set ($attr_start = "star-rating-on")
                 #end
-                <input$!{checked} class="radio" id="${customField.id}-${velocityCount}" name="${customField.id}" type="radio" value="$textutils.htmlEncode($option.value)"/>
             #end
-        #end
-        <script type="text/javascript">
-            rating_${customField.id} = jQuery('input[name=${customField.id}]');
-            rating_${customField.id}.rating();
-            rating_${customField.id}.rating('disable');
-        </script>
+            #foreach ($option in $options)
+                #if(!$option.disabled || $option.disabled == false)
+                    <div class="star-rating star-rating-readonly $attr_start" id="${customField.id}-${velocityCount}">
+                        <a title="Fine">Fine</a>
+                    </div>
+                    #if ($value && $value.toString() == $option.value.toString())
+                    #set ($attr_start = "")
+                    #end
+                #end
+            #end
+        </span>
     #else
         $textutils.htmlEncode($!value.getValue())
     #end

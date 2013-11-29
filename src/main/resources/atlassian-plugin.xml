@@ -39,12 +39,6 @@
         <resource name="delete.gif" type="download" location="/templates/delete.gif">
             <property key="content-type" value="image/gif"/>
         </resource>
-        <resource name="jquery.rating.js" type="download" location="/templates/jquery.rating.js">
-            <property key="content-type" value="text/javascript"/>
-        </resource>
-        <resource name="jquery.rating.css" type="download" location="/templates/jquery.rating.css">
-            <property key="content-type" value="text/css"/>
-        </resource>
         <context>rating-plugin</context>
     </web-resource>
 
