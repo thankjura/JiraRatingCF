@@ -1,3 +1,4 @@
+#disable_html_escaping()
 #customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
     $webResourceManager.requireResourcesForContext("rating-plugin")
     <script>
@@ -42,11 +43,12 @@
         div.rating-cancel,div.rating-cancel a {background:url("$req.contextPath/download/resources/ru.slie.jira.plugins.customfield:resources/delete.gif") no-repeat 0 -16px}
         div.star-rating,div.star-rating a {background:url("$req.contextPath/download/resources/ru.slie.jira.plugins.customfield:resources/star.gif") no-repeat 0 0px}
         div.rating-cancel a,div.star-rating a {display:block;width:16px;height:100%;background-position:0 0px;border:0}
+        div.star-rating-editable {margin-top: 5px; padding: 1px 0px 1px 0px;height: auto; overflow: hidden; position: static;}
         div.star-rating-on a {background-position:0 -16px!important}
         div.star-rating-hover a {background-position:0 -32px}
         div.star-rating {background:transparent!important;overflow:hidden!important}
     </style>
-    <span class="star-rating-control">
+    <div class="star-rating-editable">
         <div class="rating-cancel">
             <a title="Cancel Rating" onClick="updateRate${customField.id}(-1)"></a>
         </div>
@@ -66,7 +68,7 @@
                 #end
             #end
         #end
-    </span>
+    </div>
     #if (!$value)
     #set ($value = "")
     #end
