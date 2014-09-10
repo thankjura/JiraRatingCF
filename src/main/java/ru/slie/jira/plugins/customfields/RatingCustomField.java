@@ -30,12 +30,7 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.issue.fields.config.FieldConfigItemType;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
-import com.atlassian.jira.issue.fields.rest.FieldJsonRepresentation;
-import com.atlassian.jira.issue.fields.rest.FieldTypeInfo;
-import com.atlassian.jira.issue.fields.rest.FieldTypeInfoContext;
-import com.atlassian.jira.issue.fields.rest.RestAwareCustomFieldType;
-import com.atlassian.jira.issue.fields.rest.RestCustomFieldTypeOperations;
-import com.atlassian.jira.issue.fields.rest.RestFieldOperationsHandler;
+import com.atlassian.jira.issue.fields.rest.*;
 import com.atlassian.jira.issue.fields.rest.json.JsonData;
 import com.atlassian.jira.issue.fields.rest.json.JsonType;
 import com.atlassian.jira.issue.fields.rest.json.JsonTypeBuilder;
@@ -43,20 +38,16 @@ import com.atlassian.jira.issue.fields.rest.json.beans.CustomFieldOptionJsonBean
 import com.atlassian.jira.issue.fields.rest.json.beans.JiraBaseUrls;
 import com.atlassian.jira.util.ErrorCollection;
 import com.atlassian.jira.util.ErrorCollection.Reason;
-import com.atlassian.jira.util.NotNull;
-import com.atlassian.util.concurrent.Nullable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
 import org.ofbiz.core.entity.GenericValue;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
 /**
  * Select Custom Field Type allows selecting of a single {@link Option}.
@@ -109,7 +100,7 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
         return issues;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     protected PersistenceFieldType getDatabaseType()
     {
@@ -123,7 +114,7 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
     }
 
     @Override
-    protected Option getObjectFromDbValue(@NotNull Object databaseValue) throws FieldValidationException
+    protected Option getObjectFromDbValue(@Nonnull Object databaseValue) throws FieldValidationException
     {
         return getSingularObjectFromString((String) databaseValue);
     }
@@ -195,7 +186,7 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
         }
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public List<FieldConfigItemType> getConfigurationItemTypes()
     {
@@ -287,7 +278,7 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
 
     // -------------------------------------------------------------------------------- Sortable custom field
     @Override
-    public int compare(@NotNull final Option customFieldObjectValue1, @NotNull final Option customFieldObjectValue2, final FieldConfig fieldConfig)
+    public int compare(@Nonnull final Option customFieldObjectValue1, @Nonnull final Option customFieldObjectValue2, final FieldConfig fieldConfig)
     {
         final Options options = getOptions(fieldConfig, null);
 

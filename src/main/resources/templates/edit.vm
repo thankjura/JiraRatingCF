@@ -1,55 +1,9 @@
 #customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
     $webResourceManager.requireResourcesForContext("rating-plugin")
-    <script>
-        function updateRateOver${customField.id}(val) {
-            var stars = jQuery(".rater-${customField.id}");
-            var AC = true;
-            for (var i = 0; i < stars.length; i++) {
-                if (AC) {
-                    jQuery(stars[i]).addClass("star-rating-hover");
-                } else {
-                    jQuery(stars[i]).removeClass("star-rating-hover");
-                }
-                if (stars[i].children[0].innerHTML == val) { AC = false;}
-            }
-            return false;
-        }
-        function updateRateOverOff${customField.id}() {
-            var stars = jQuery(".rater-${customField.id}");
-            for (var i = 0; i < stars.length; i++) {
-                jQuery(stars[i]).removeClass("star-rating-hover");
-            }
-            return false;
-        }
-        function updateRate${customField.id}(val) {
-            jQuery('input[name=${customField.id}]')[0].value=val;
-            var stars = jQuery(".rater-${customField.id}");
-            var AC = true;
-            if ( val == -1 ) {AC = false;}
-            for (var i = 0; i < stars.length; i++) {
-                if (AC) {
-                    jQuery(stars[i]).addClass("star-rating-on");
-                } else {
-                    jQuery(stars[i]).removeClass("star-rating-on");
-                }
-                if (stars[i].children[0].innerHTML == val) { AC = false;}
-            }
-            return false;
-        }
-    </script>
-    <style>
-        div.rating-cancel,div.star-rating {float:left;width:17px;height:15px;text-indent:-999em;cursor:pointer;display:block;background:transparent;overflow:hidden}
-        div.rating-cancel,div.rating-cancel a {background:url("$req.contextPath/download/resources/ru.slie.jira.plugins.customfield:resources/delete.gif") no-repeat 0 -16px}
-        div.star-rating,div.star-rating a {background:url("$req.contextPath/download/resources/ru.slie.jira.plugins.customfield:resources/star.gif") no-repeat 0 0px}
-        div.rating-cancel a,div.star-rating a {display:block;width:16px;height:100%;background-position:0 0px;border:0}
-        div.star-rating-editable {margin-top: 5px; padding: 1px 0px 1px 0px;height: auto; overflow: hidden; position: static;}
-        div.star-rating-on a {background-position:0 -16px!important}
-        div.star-rating-hover a {background-position:0 -32px}
-        div.star-rating {background:transparent!important;overflow:hidden!important}
-    </style>
+    $webResourceManager.requireResourcesForContext("rating-plugin")
     <div class="star-rating-editable">
         <div class="rating-cancel">
-            <a title="Cancel Rating" onClick="updateRate${customField.id}(-1)"></a>
+            <a title="Cancel Rating" onClick="updateRate(-1, '${customField.id}')"></a>
         </div>
         #set ($attr_start = "")
         #foreach ($option in $configs.options)
@@ -60,7 +14,7 @@
         #foreach ($option in $configs.options)
             #if(!$option.disabled || $option.disabled == false || ($value && $value == $option.optionId.toString()))
                 <div class="star-rating rater-${customField.id} radio-rating $attr_start" id="${customField.id}-${velocityCount}">
-                    <a title="$cfValueEncoder.encodeForHtml($option.value)" onmouseover="updateRateOver${customField.id}($option.optionId.toString())" onmouseout="updateRateOverOff${customField.id}()" onclick="updateRate${customField.id}($option.optionId.toString())">$option.optionId.toString()</a>
+                    <a title="$cfValueEncoder.encodeForHtml($option.value)" onmouseover="updateRateOver($option.optionId.toString(), '${customField.id}')" onmouseout="updateRateOverOff('${customField.id}')" onclick="updateRate($option.optionId.toString(), '${customField.id}')">$option.optionId.toString()</a>
                 </div>
                 #if ($value && $value == $option.optionId.toString())
                 #set ($attr_start = "")

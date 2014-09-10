@@ -1,0 +1,11 @@
+div.star-rating, div.rating-cancel {float:left;width:17px;height:15px;text-indent:-999em;display:block;background:transparent;overflow:hidden}
+div.star-rating, div.star-rating a {background:url("../../download/resources/ru.slie.jira.plugins.customfield:resources/images/star.gif") no-repeat 0 0px}
+div.star-rating a {cursor: pointer;}
+div.star-rating a, div.rating-cancel a {display:block;width:16px;height:16px;background-position:0 0px;border:0}
+div.star-rating-on a {background-position:0 -16px!important}
+div.star-rating-readonly {padding: 1px 0px 1px 0px;height: auto; overflow: hidden; position: static;}
+div.star-rating-readonly a {cursor:default !important}
+div.star-rating {background:transparent!important;overflow:hidden!important}
+div.rating-cancel, div.rating-cancel a {background:url("../../download/resources/ru.slie.jira.plugins.customfield:resources/images/delete.gif") no-repeat 0 -16px}
+div.star-rating-editable {margin-top: 5px; padding: 1px 0px 1px 0px;height: auto; overflow: hidden; position: static;}
+div.star-rating-hover a {background-position:0 -32px}

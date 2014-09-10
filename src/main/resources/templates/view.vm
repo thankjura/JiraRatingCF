@@ -3,15 +3,6 @@
         $textutils.br($textutils.htmlEncode($!value.getValue(), false))
     #elseif ($options)
         $webResourceManager.requireResourcesForContext("rating-plugin")
-        <style>
-            div.star-rating {float:left;width:17px;height:15px;text-indent:-999em;display:block;background:transparent;overflow:hidden}
-            div.star-rating,div.star-rating a {background:url("$req.contextPath/download/resources/ru.slie.jira.plugins.customfield:resources/star.gif") no-repeat 0 0px}
-            div.star-rating a {display:block;width:16px;height:16px;background-position:0 0px;border:0}
-            div.star-rating-on a {background-position:0 -16px!important}
-            div.star-rating-readonly {padding: 1px 0px 1px 0px;height: auto; overflow: hidden; position: static;}
-            div.star-rating-readonly a {cursor:default !important}
-            div.star-rating {background:transparent!important;overflow:hidden!important}
-        </style>
         <div class="star-rating-readonly">
             #set ($attr_start = "")
             #foreach ($option in $options)

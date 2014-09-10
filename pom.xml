@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.slie.jira.plugins</groupId>
     <artifactId>customfield</artifactId>
-    <version>2.0.4</version>
+    <version>2.0.4.1</version>
     <organization>
         <name>Oboz Yury</name>
         <url>mailto:me@slie.ru</url>
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.1</version>
+            <version>4.10</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -81,8 +81,8 @@
         </plugins>
     </build>
     <properties>
-        <jira.version>5.0.6</jira.version>
-        <amps.version>3.11</amps.version>
+        <jira.version>6.3.5</jira.version>
+        <amps.version>5.0.4</amps.version>
     </properties>
     <scm>
         <connection>scm:git:git://github.com/thankjura/JiraRatingCF.git</connection>

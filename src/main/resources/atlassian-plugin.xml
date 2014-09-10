@@ -11,6 +11,7 @@
         <param name="plugin-banner">images/pluginBanner.png</param>
         <param name="vendor-icon">images/IconSmall.gif</param>
         <param name="vendor-logo">images/Icon.png</param>
+        <param name="atlassian-data-center-compatible">true</param>
     </plugin-info>
 
     <resource type="i18n" name="i18n" location="ru.slie.plugins.customfield"/>
@@ -20,6 +21,7 @@
         <resource type="velocity" name="column-view" location="templates/view.vm"/>
         <resource type="velocity" name="xml" location="templates/xml.vm"/>
         <resource type="velocity" name="edit" location="templates/edit.vm"/>
+        <resource type="download" name="customfieldpreview.png" location="images/rating-customfield-preview.png" />
     </customfield-type>
 
     <customfield-searcher key="selectsearcher" name="Select List Searcher"
@@ -33,12 +35,13 @@
 
     <web-resource name="Resources" key="resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
-        <resource name="star.gif" type="download" location="/templates/star.gif">
-            <property key="content-type" value="image/gif"/>
+        <resource type="download" name="rating-customfield.css" location="/css/rating-customfield.css">
+            <property key="content-type" value="text/css"/>
         </resource>
-        <resource name="delete.gif" type="download" location="/templates/delete.gif">
-            <property key="content-type" value="image/gif"/>
+        <resource type="download" name="rating-customfield.js" location="/js/rating-customfield.js">
+            <property key="content-type" value="text/javascript"/>
         </resource>
+        <resource type="download" name="images/" location="/images"/>
         <context>rating-plugin</context>
     </web-resource>
 
