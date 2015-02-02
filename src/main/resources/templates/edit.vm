@@ -1,31 +1,37 @@
 #customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
-    $webResourceManager.requireResourcesForContext("rating-plugin")
-    $webResourceManager.requireResourcesForContext("rating-plugin")
+    $webResourceManager.requireResourcesForContext("ru.slie.jira.plugins.customfields")
     <div class="star-rating-editable">
         <div class="rating-cancel">
-            <a title="Cancel Rating" onClick="updateRate(-1, '${customField.id}')"></a>
+            <a title="Cancel Rating" onmouseover="updateRateOver(-1, '${customField.id}')" onmouseout="updateRateOverOff('${customField.id}')" onClick="updateRate(-1, '${customField.id}')"></a>
         </div>
+        
         #set ($attr_start = "")
         #foreach ($option in $configs.options)
             #if ($value && $value == $option.optionId.toString())
-            #set ($attr_start = "star-rating-on")
+            	#set ($attr_start = "star-rating-on")
             #end
         #end
+        
         #foreach ($option in $configs.options)
             #if(!$option.disabled || $option.disabled == false || ($value && $value == $option.optionId.toString()))
                 <div class="star-rating rater-${customField.id} radio-rating $attr_start" id="${customField.id}-${velocityCount}">
-                    <a title="$cfValueEncoder.encodeForHtml($option.value)" onmouseover="updateRateOver($option.optionId.toString(), '${customField.id}')" onmouseout="updateRateOverOff('${customField.id}')" onclick="updateRate($option.optionId.toString(), '${customField.id}')">$option.optionId.toString()</a>
+                    <a title="$cfValueEncoder.encodeForHtml($option.value)" onmouseover="updateRateOver($option.optionId.toString(), '${customField.id}')" onmouseout="updateRateOverOff('${customField.id}')" onclick="updateRate($option.optionId.toString(), '${customField.id}')">
+                    	$option.optionId.toString()
+                    </a>
                 </div>
                 #if ($value && $value == $option.optionId.toString())
-                #set ($attr_start = "")
+                	#set ($attr_start = "")
                 #end
             #end
         #end
+        
+        <span class="rating-tip rating-tip-${customField.id}"></span>
+        
     </div>
     #if (!$value)
-    #set ($value = "-1")
+    	#set ($value = "-1")
     #elseif ($value == "99999999999")
-    #set ($value = "-1")
+    	#set ($value = "-1")
     #end
     <input class="radio-rating" name="${customField.id}" type="text" value="$value" style="display: none;" />
 #customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)

@@ -14,7 +14,8 @@
         <param name="atlassian-data-center-compatible">true</param>
     </plugin-info>
 
-    <resource type="i18n" name="i18n" location="ru.slie.plugins.customfield"/>
+    <resource type="i18n" name="i18n" location="ru.slie.plugins.customfield" />
+    
     <customfield-type name="Rating Custom Field" i18n-name-key="rating-custom-field.name" key="rating-custom-field" class="ru.slie.jira.plugins.customfields.RatingCustomField">
         <description key="rating-custom-field.description">The Rating Custom Field Plugin</description>
         <resource type="velocity" name="view" location="templates/view.vm"/>
@@ -35,14 +36,11 @@
 
     <web-resource name="Resources" key="resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
-        <resource type="download" name="rating-customfield.css" location="/css/rating-customfield.css">
-            <property key="content-type" value="text/css"/>
-        </resource>
-        <resource type="download" name="rating-customfield.js" location="/js/rating-customfield.js">
-            <property key="content-type" value="text/javascript"/>
-        </resource>
-        <resource type="download" name="images/" location="/images"/>
-        <context>rating-plugin</context>
+        <resource type="download" name="rating-customfield.css" location="/css/rating-customfield.css" />
+        <resource type="download" name="rating-customfield.js" location="/js/rating-customfield.js" />
+        <resource type="download" name="images/" location="/images" />
+        <context>ru.slie.jira.plugins.customfields</context>
+        <context>atl.general</context>
     </web-resource>
 
 </atlassian-plugin>
