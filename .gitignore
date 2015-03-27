@@ -8,3 +8,4 @@ target/container/
 target/dependency-maven-plugin-markers/
 target/jira/
 target/maven-archiver/
+target/maven-status/

@@ -42,7 +42,7 @@
             <property key="content-type" value="text/javascript"/>
         </resource>
         <resource type="download" name="images/" location="/images"/>
-        <context>rating-plugin</context>
+        <context>atl.general</context>
     </web-resource>
 
 </atlassian-plugin>
