@@ -1,21 +1,5 @@
 package ru.slie.jira.plugins.customfields;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.TermQuery;
-import org.ofbiz.core.entity.GenericValue;
-
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.imports.project.customfield.ProjectCustomFieldImporter;
 import com.atlassian.jira.imports.project.customfield.ProjectImportableCustomField;
@@ -28,8 +12,6 @@ import com.atlassian.jira.issue.customfields.GroupSelectorField;
 import com.atlassian.jira.issue.customfields.MultipleSettableCustomFieldType;
 import com.atlassian.jira.issue.customfields.SortableCustomField;
 import com.atlassian.jira.issue.customfields.config.item.SettableOptionsConfigItem;
-import com.atlassian.jira.issue.customfields.converters.SelectConverter;
-import com.atlassian.jira.issue.customfields.converters.StringConverter;
 import com.atlassian.jira.issue.customfields.impl.AbstractSingleFieldType;
 import com.atlassian.jira.issue.customfields.impl.FieldValidationException;
 import com.atlassian.jira.issue.customfields.impl.rest.SelectCustomFieldOperationsHandler;
@@ -46,12 +28,7 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.issue.fields.config.FieldConfigItemType;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
-import com.atlassian.jira.issue.fields.rest.FieldJsonRepresentation;
-import com.atlassian.jira.issue.fields.rest.FieldTypeInfo;
-import com.atlassian.jira.issue.fields.rest.FieldTypeInfoContext;
-import com.atlassian.jira.issue.fields.rest.RestAwareCustomFieldType;
-import com.atlassian.jira.issue.fields.rest.RestCustomFieldTypeOperations;
-import com.atlassian.jira.issue.fields.rest.RestFieldOperationsHandler;
+import com.atlassian.jira.issue.fields.rest.*;
 import com.atlassian.jira.issue.fields.rest.json.JsonData;
 import com.atlassian.jira.issue.fields.rest.json.JsonType;
 import com.atlassian.jira.issue.fields.rest.json.JsonTypeBuilder;
@@ -59,6 +36,15 @@ import com.atlassian.jira.issue.fields.rest.json.beans.CustomFieldOptionJsonBean
 import com.atlassian.jira.issue.fields.rest.json.beans.JiraBaseUrls;
 import com.atlassian.jira.util.ErrorCollection;
 import com.atlassian.jira.util.ErrorCollection.Reason;
+import org.apache.commons.lang.StringUtils;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.TermQuery;
+import org.ofbiz.core.entity.GenericValue;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
 /**
  * Select Custom Field Type allows selecting of a single {@link Option}.
@@ -84,25 +70,6 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
 			CustomFieldValuePersister customFieldValuePersister,
 			OptionsManager optionsManager,
 			GenericConfigManager genericConfigManager, JiraBaseUrls jiraBaseUrls) {
-		super(customFieldValuePersister, genericConfigManager);
-		this.optionsManager = optionsManager;
-		this.jiraBaseUrls = jiraBaseUrls;
-		projectCustomFieldImporter = new SelectCustomFieldImporter();
-	}
-
-	/**
-	 * @deprecated Use
-	 *             {@link #RatingCustomField(com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister, com.atlassian.jira.issue.customfields.manager.OptionsManager, com.atlassian.jira.issue.customfields.manager.GenericConfigManager, com.atlassian.jira.issue.fields.rest.json.beans.JiraBaseUrls)}
-	 *             instead. Since v5.0.
-	 */
-	@Deprecated
-	public RatingCustomField(
-			final CustomFieldValuePersister customFieldValuePersister,
-			final StringConverter stringConverter,
-			final SelectConverter selectConverter,
-			final OptionsManager optionsManager,
-			final GenericConfigManager genericConfigManager,
-			JiraBaseUrls jiraBaseUrls) {
 		super(customFieldValuePersister, genericConfigManager);
 		this.optionsManager = optionsManager;
 		this.jiraBaseUrls = jiraBaseUrls;
