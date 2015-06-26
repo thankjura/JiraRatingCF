@@ -8,12 +8,13 @@
             #foreach ($option in $options)
                 #if ($value && $value.toString() == $option.value.toString())
                 #set ($attr_start = "star-rating-on")
+                #set ($attr_title = $cfValueEncoder.encodeForHtml($option.value))
                 #end
             #end
             #foreach ($option in $options)
                 #if(!$option.disabled || $option.disabled == false)
                     <div class="star-rating star-rating-readonly $attr_start" id="${customField.id}-${velocityCount}">
-                        <a title="$cfValueEncoder.encodeForHtml($option.value)">$option.optionId.toString()</a>
+                        <a title="$!attr_title">$option.optionId.toString()</a>
                     </div>
                     #if ($value && $value.toString() == $option.value.toString())
                     	#set ($attr_start = "")
