@@ -142,13 +142,8 @@
     
     <properties>
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
-<<<<<<< HEAD
-        <jira.version>6.3.14</jira.version>
-        <amps.version>5.0.13</amps.version>
-=======
         <jira.version>7.0.0</jira.version>
         <amps.version>5.1.18</amps.version>
->>>>>>> 4e1015afd1626a46909ff11e639af0f1f0338ec4
     </properties>
     <scm>
         <connection>scm:git:git://github.com/thankjura/JiraRatingCF.git</connection>
