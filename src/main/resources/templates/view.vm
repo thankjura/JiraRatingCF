@@ -2,11 +2,26 @@
     #if (${displayParameters.excel_view})
         $textutils.br($textutils.htmlEncode($!value.getValue(), false))
     #elseif ($options)
-        $webResourceManager.requireResourcesForContext("ru.slie.jira.plugins.customfields")
+        $webResourceManager.requireResource("ru.slie.jira.plugins.customfield:resources")
+        <script>
+            (function ($) {
+                var ss = document.styleSheets;
+                for (var i = 0, max = ss.length; i < max; i++) {
+                    if (ss[i].href && ss[i].href.indexOf("rating-customfield.css") > 0) {
+                        return;
+                    }
+                }
+                var link = document.createElement("link");
+                link.rel = "stylesheet";
+                link.type = "text/css";
+                link.href = AJS.contextPath() + "/s/d41d8cd98f00b204e9800998ecf8427e-CDN/ru_RUg6mibw/6338/4/2.1.1/_/download/resources/ru.slie.jira.plugins.customfield:resources/rating-customfield.css";
+                document.getElementsByTagName("head")[0].appendChild(link);
+            })(AJS.$);
+        </script>
         <div class="star-rating-readonly">
             #set ($attr_start = "")
             #foreach ($option in $options)
-                #if ($value && $value.toString() == $option.value.toString())
+                #if ($value && $value.value == $option.value)
                 #set ($attr_start = "star-rating-on")
                 #set ($attr_title = $cfValueEncoder.encodeForHtml($option.value))
                 #end
@@ -16,7 +31,7 @@
                     <div class="star-rating star-rating-readonly $attr_start" id="${customField.id}-${velocityCount}">
                         <a title="$!attr_title">$option.optionId.toString()</a>
                     </div>
-                    #if ($value && $value.toString() == $option.value.toString())
+                    #if ($value && $value.value == $option.value)
                     	#set ($attr_start = "")
                     #end
                 #end

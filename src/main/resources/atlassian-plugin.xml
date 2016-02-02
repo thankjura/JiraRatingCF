@@ -44,6 +44,7 @@
         <resource type="download" name="images/" location="/images"/>
         <context>jira.admin</context>
         <context>jira.general</context>
+        <context>atl.general</context>
     </web-resource>
 
 </atlassian-plugin>

@@ -19,8 +19,7 @@ div.star-rating a, div.rating-cancel a {
 
 div.star-rating, div.star-rating a {
 	background:
-		url("../../download/resources/ru.slie.jira.plugins.customfield:resources/images/star.gif")
-		no-repeat 0 0px;
+		url("../../download/resources/ru.slie.jira.plugins.customfield:resources/images/star.gif") no-repeat 0 0px;
 }
 
 div.star-rating-hover a {
@@ -49,8 +48,7 @@ div.star-rating {
 
 div.rating-cancel, div.rating-cancel a {
 	background:
-		url("../../download/resources/ru.slie.jira.plugins.customfield:resources/images/delete.gif")
-		no-repeat 0 0px;
+		url("../../download/resources/ru.slie.jira.plugins.customfield:resources/images/delete.gif") no-repeat 0 0px;
 }
 
 div.rating-cancel a:hover {
