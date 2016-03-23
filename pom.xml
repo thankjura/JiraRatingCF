@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.slie.jira.plugins</groupId>
     <artifactId>customfield</artifactId>
-    <version>2.0.7</version>
+    <version>2.0.7.1</version>
     <organization>
         <name>Oboz Yury</name>
         <url>mailto:me@slie.ru</url>
@@ -81,69 +81,46 @@
             </plugin>
         </plugins>
         <pluginManagement>
-        	<plugins>
-        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        		<plugin>
-        			<groupId>org.eclipse.m2e</groupId>
-        			<artifactId>lifecycle-mapping</artifactId>
-        			<version>1.0.0</version>
-        			<configuration>
-        				<lifecycleMappingMetadata>
-        					<pluginExecutions>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>
-        									com.atlassian.maven.plugins
-        								</groupId>
-        								<artifactId>
-        									maven-jira-plugin
-        								</artifactId>
-        								<versionRange>
-        									[5.0.4,)
-        								</versionRange>
-        								<goals>
-        									<goal>
-        										generate-test-manifest
-        									</goal>
-        									<goal>
-        										generate-rest-docs
-        									</goal>
-        									<goal>
-        										copy-bundled-dependencies
-        									</goal>
-        									<goal>
-        										copy-test-bundled-dependencies
-        									</goal>
-        									<goal>
-        										compress-resources
-        									</goal>
-        									<goal>
-        										filter-test-plugin-descriptor
-        									</goal>
-        									<goal>
-        										filter-plugin-descriptor
-        									</goal>
-        									<goal>
-        										generate-manifest
-        									</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<ignore></ignore>
-        							</action>
-        						</pluginExecution>
-        					</pluginExecutions>
-        				</lifecycleMappingMetadata>
-        			</configuration>
-        		</plugin>
-        	</plugins>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>com.atlassian.maven.plugins</groupId>
+                                        <artifactId>maven-jira-plugin</artifactId>
+                                        <versionRange>[5.0.4,)</versionRange>
+                                        <goals>
+                                            <goal>generate-test-manifest</goal>
+                                            <goal>generate-rest-docs</goal>
+                                            <goal>copy-bundled-dependencies</goal>
+                                            <goal>copy-test-bundled-dependencies</goal>
+                                            <goal>compress-resources</goal>
+                                            <goal>filter-test-plugin-descriptor</goal>
+                                            <goal>filter-plugin-descriptor</goal>
+                                            <goal>generate-manifest</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
         </pluginManagement>
     </build>
-    
     <properties>
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
         <jira.version>6.3.8</jira.version>
-        <amps.version>5.1.18</amps.version>
+        <amps.version>6.2.3</amps.version>
     </properties>
     <scm>
         <connection>scm:git:git://github.com/thankjura/JiraRatingCF.git</connection>
