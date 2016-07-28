@@ -24,12 +24,11 @@
         <resource type="download" name="customfieldpreview.png" location="images/rating-customfield-preview.png" />
     </customfield-type>
 
-    <customfield-searcher key="selectsearcher" name="Select List Searcher"
-                          i18n-name-key="rating-custom-field.selectsearcher.name"
-                          class="ru.slie.jira.plugins.customfields.searchers.RatingSearcher">
+    <customfield-searcher key="selectsearcher" name="Select List Searcher" i18n-name-key="rating-custom-field.selectsearcher.name" class="ru.slie.jira.plugins.customfields.searchers.RatingSearcher">
         <description key="rating-custom-field.selectsearcher.desc">Search for values using a select list.</description>
         <resource type="velocity" name="search" location="templates/searchers/search-select.vm"/>
         <resource type="velocity" name="view" location="templates/searchers/view-searcher-htmltext.vm"/>
+        <resource type="velocity" name="label" location="templates/searchers/label-searcher-basictext.vm"/>
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="rating-custom-field"/>
     </customfield-searcher>
 
