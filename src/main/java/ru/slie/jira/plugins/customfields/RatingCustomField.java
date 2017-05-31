@@ -54,23 +54,29 @@ import java.util.*;
  * <dt><Strong>Database Storage Type</Strong></dt> <dd>{@link String} of Option
  * ID</dd> </dl>
  */
-public class RatingCustomField extends AbstractSingleFieldType<Option>
-		implements MultipleSettableCustomFieldType<Option, Option>,
-		SortableCustomField<Option>, GroupSelectorField,
-		ProjectImportableCustomField, RestAwareCustomFieldType,
+public class RatingCustomField extends AbstractSingleFieldType<Option> implements
+		MultipleSettableCustomFieldType<Option, Option>,
+		SortableCustomField<String>,
+		GroupSelectorField,
+		ProjectImportableCustomField,
+		RestAwareCustomFieldType,
 		RestCustomFieldTypeOperations {
 	private final OptionsManager optionsManager;
 	private final ProjectCustomFieldImporter projectCustomFieldImporter;
 	private final JiraBaseUrls jiraBaseUrls;
+	private static final Long PHANTOM_OPTION = 99999999999L;
 
 	// private static final Logger log =
 	// Logger.getLogger(RatingCustomField.class);
 
-	public RatingCustomField(CustomFieldValuePersister customFieldValuePersister, OptionsManager optionsManager, GenericConfigManager genericConfigManager, JiraBaseUrls jiraBaseUrls) {
+	public RatingCustomField(CustomFieldValuePersister customFieldValuePersister,
+							 OptionsManager optionsManager,
+							 GenericConfigManager genericConfigManager,
+							 JiraBaseUrls jiraBaseUrls) {
 		super(customFieldValuePersister, genericConfigManager);
 		this.optionsManager = optionsManager;
 		this.jiraBaseUrls = jiraBaseUrls;
-		projectCustomFieldImporter = new SelectCustomFieldImporter();
+		this.projectCustomFieldImporter = new SelectCustomFieldImporter();
 	}
 
 	@Override
@@ -114,6 +120,11 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
 		if ("-1".equals(string)) {
 			return null;
 		}
+
+		if (PHANTOM_OPTION.toString().equals(string)) {
+			return null;
+		}
+
 		return getOptionFromStringValue(string);
 	}
 
@@ -135,9 +146,18 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
 	public String getStringFromSingularObject(final Option optionObject) {
 		if (optionObject == null) {
 			return null;
+		} else {
+			if (PHANTOM_OPTION.equals(optionObject.getOptionId())) {
+				return null;
+			}
 		}
 
-		return optionObject.getOptionId().toString();
+		Long option = optionObject.getOptionId();
+		if (option != null) {
+			return option.toString();
+		}
+
+		return null;
 	}
 
 	public Set<Long> getIssueIdsWithValue(final CustomField field, final Option option) {
@@ -190,6 +210,9 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
 		Long id = null;
 		if (option != null) {
 			id = option.getOptionId();
+			if (PHANTOM_OPTION.equals(id)) {
+				id = null;
+			}
 		}
 		genericConfigManager.update(CustomFieldType.DEFAULT_VALUE_TYPE, fieldConfig.getId().toString(), id);
 	}
@@ -227,28 +250,6 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
 	// MultiSettable Methods
 	public Options getOptions(final FieldConfig config,	@Nullable final JiraContextNode jiraContextNode) {
 		return optionsManager.getOptions(config);
-	}
-
-	// -----------------------------------------------------------------------------
-	// Sortable custom field
-	@Override
-	public int compare(@Nonnull final Option customFieldObjectValue1, @Nonnull final Option customFieldObjectValue2, final FieldConfig fieldConfig) {
-		final Options options = getOptions(fieldConfig, null);
-
-		if (options != null) {
-			final Long v1 = customFieldObjectValue1.getSequence();
-			final Long v2 = customFieldObjectValue2.getSequence();
-
-			if (v1 > v2) {
-				return 1;
-			} else if (v1 < v2) {
-				return -1;
-			} else {
-				return 0;
-			}
-		} else {
-			return 0;
-		}
 	}
 
 	@Override
@@ -317,14 +318,13 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
 	}
 
 	@Override
-	public Option getValueFromIssue(CustomField field, Issue issue) {
+	public Option getValueFromIssue(final CustomField field, final Issue issue) {
 		final Option option = super.getValueFromIssue(field, issue);
 		if (option == null) {
 			return new Option() {
-
 				@Override
 				public Long getOptionId() {
-					return 99999999999L;
+					return PHANTOM_OPTION;
 				}
 
 				@Override
@@ -344,50 +344,63 @@ public class RatingCustomField extends AbstractSingleFieldType<Option>
 
 				@Override
 				public GenericValue getGenericValue() {
-					throw new UnsupportedOperationException("Not supported yet.");
-				}
-
-				@Override
-				public FieldConfig getRelatedCustomField() {
-					throw new UnsupportedOperationException("Not supported yet.");
-				}
-
-				@Override
-				public Option getParentOption() {
-					throw new UnsupportedOperationException("Not supported yet.");
-				}
-
-				@Override
-				public List<Option> getChildOptions() {
 					return null;
 				}
 
 				@Override
+				public FieldConfig getRelatedCustomField() {
+					if (issue != null) {
+						return field.getRelevantConfig(issue);
+					}
+
+					return null;
+				}
+
+				@Override
+				public Option getParentOption() {
+					return null;
+				}
+
+				@Override
+				public List<Option> getChildOptions() {
+					return new ArrayList<>();
+				}
+
+				@Override
 				public void setSequence(Long l) {
-					throw new UnsupportedOperationException("Not supported yet.");
 				}
 
 				@Override
 				public void setValue(String string) {
-					throw new UnsupportedOperationException("Not supported yet.");
 				}
 
 				@Override
 				public void setDisabled(Boolean bln) {
-					throw new UnsupportedOperationException("Not supported yet.");
 				}
 
 				@Override
 				public List<Option> retrieveAllChildren(List<Option> list) {
-					throw new UnsupportedOperationException("Not supported yet.");
+					return null;
 				}
 
 				@Override
 				public void store() {
-					throw new UnsupportedOperationException("Not supported yet.");
 				}
 			};
 		}
 		return option;
+	}
+
+	@Override
+	public int compare(@Nonnull String val1, @Nonnull String val2, FieldConfig fieldConfig) {
+		Options options = this.getOptions(fieldConfig, null);
+		if(options != null) {
+			int v1 = options.indexOf(options.getOptionById(Long.valueOf(val1)));
+			int v2 = options.indexOf(options.getOptionById(Long.valueOf(val2)));
+			return v1 > v2?1:(v1 < v2?-1:0);
+		} else {
+			log.info("No options were found.");
+			return 0;
+		}
 	}
 }
