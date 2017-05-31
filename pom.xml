@@ -75,8 +75,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -85,7 +85,7 @@
     <properties>
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
         <jira.version>7.1.2</jira.version>
-        <amps.version>6.2.3</amps.version>
+        <amps.version>6.2.6</amps.version>
     </properties>
     <scm>
         <connection>scm:git:git://github.com/thankjura/JiraRatingCF.git</connection>
