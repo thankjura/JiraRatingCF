@@ -2,25 +2,23 @@
     #if (${displayParameters.excel_view})
         $textutils.br($textutils.htmlEncode($!value.getValue(), false))
     #elseif ($options)
-        $webResourceManager.requireResourcesForContext("ru.slie.jira.plugins.customfields")
-        <div class="star-rating-readonly">
-            #set ($attr_start = "")
-            #foreach ($option in $options)
-                #if ($value && $value.toString() == $option.value.toString())
-                #set ($attr_start = "star-rating-on")
-                #set ($attr_title = $cfValueEncoder.encodeForHtml($option.value))
-                #end
-            #end
-            #foreach ($option in $options)
-                #if(!$option.disabled || $option.disabled == false)
-                    <div class="star-rating star-rating-readonly $attr_start" id="${customField.id}-${velocityCount}">
-                        <a title="$!attr_title">$option.optionId.toString()</a>
-                    </div>
-                    #if ($value && $value.toString() == $option.value.toString())
-                    	#set ($attr_start = "")
+        <div class="slie-rating-field" data-title="$textutils.htmlEncode($!value.getValue())">
+            <div class="slie-rating-view">
+                #set ($haveSelected = false)
+                #foreach ($option in $options)
+                    #if ($value.optionId.toString() == $option.optionId.toString())
+                    #set ($haveSelected = true)
                     #end
                 #end
-            #end
+                #foreach ($option in $options)
+                    #if(!$option.disabled || $option.disabled == false)
+                        <div class="slie-star#if($haveSelected) slie-star-gold#end"></div>
+                        #if ($option.optionId.toString() == $value.optionId.toString())
+                        #set($haveSelected = false)
+                        #end
+                    #end
+                #end
+            </div>
         </div>
     #else
         $textutils.htmlEncode($!value.getValue())

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
     <plugin-info>
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}"/>
         <!-- Support for the following marketing assets has been implemented -->
-        <param name="plugin-icon">images/IconSmall.gif</param>
-        <param name="plugin-logo">images/pluginLogo.png</param>
-        <!-- Support for the following marketing assets will be implemented soon -->
-        <param name="plugin-banner">images/pluginBanner.png</param>
-        <param name="vendor-icon">images/IconSmall.gif</param>
-        <param name="vendor-logo">images/Icon.png</param>
+        <param name="vendor-logo">images/slieLogo.png</param>
+        <param name="vendor-icon">images/slieIcon.png</param>
+        <param name="plugin-icon">images/ratingIcon.png</param>
+        <param name="plugin-logo">images/ratingLogo.png</param>
+        <param name="plugin-banner">images/02_banner.png</param>
         <param name="atlassian-data-center-compatible">true</param>
     </plugin-info>
 
-    <resource type="i18n" name="i18n" location="ru.slie.plugins.customfield"/>
-    <customfield-type name="Rating Custom Field" i18n-name-key="rating-custom-field.name" key="rating-custom-field" class="ru.slie.jira.plugins.customfields.RatingCustomField">
-        <description key="rating-custom-field.description">The Rating Custom Field Plugin</description>
+    <resource type="i18n" name="i18n" location="rating-customfield"/>
+    <customfield-type name="Rating Custom Field" i18n-name-key="rating-customfield.name" key="rating-custom-field" class="ru.slie.jira.plugins.customfields.RatingCustomField">
+        <description key="rating-customfield.description">The Rating Custom Field Plugin</description>
         <resource type="velocity" name="view" location="templates/view.vm"/>
         <resource type="velocity" name="column-view" location="templates/view.vm"/>
         <resource type="velocity" name="xml" location="templates/xml.vm"/>
@@ -24,15 +23,15 @@
         <resource type="download" name="customfieldpreview.png" location="images/rating-customfield-preview.png" />
     </customfield-type>
 
-    <customfield-searcher key="selectsearcher" name="Select List Searcher" i18n-name-key="rating-custom-field.selectsearcher.name" class="ru.slie.jira.plugins.customfields.searchers.RatingSearcher">
-        <description key="rating-custom-field.selectsearcher.desc">Search for values using a select list.</description>
+    <customfield-searcher key="selectsearcher" name="Select List Searcher" i18n-name-key="rating-customfield.selectsearcher.name" class="ru.slie.jira.plugins.customfields.searchers.RatingSearcher">
+        <description key="rating-customfield.selectsearcher.desc">Search for values using a select list.</description>
         <resource type="velocity" name="search" location="templates/searchers/search-select.vm"/>
         <resource type="velocity" name="view" location="templates/searchers/view-searcher-htmltext.vm"/>
         <resource type="velocity" name="label" location="templates/searchers/label-searcher-basictext.vm"/>
-        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="rating-custom-field"/>
+        <valid-customfield-type package="${atlassian.plugin.key}" key="rating-custom-field"/>
     </customfield-searcher>
 
-    <web-resource name="Resources" key="resources">
+    <web-resource name="Resources" key="rating-resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <resource type="download" name="rating-customfield.css" location="/css/rating-customfield.css">
             <property key="content-type" value="text/css"/>

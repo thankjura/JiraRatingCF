@@ -1,65 +1,96 @@
-function updateRateOver(optionId, cfId) {
-	var stars = jQuery(".rater-" + cfId);
-	var tip = jQuery(".rating-tip-" + cfId);
-	tip[0].data = tip.html();
-	var AC = true;
+(function($) {
+    function initRatingField(field) {
+        field.addClass("init");
+        field.disableSelection();
+        var tip = field.find(".slie-rating-tip");
 
-	if (optionId == -1) {
-		tip.html('Cancel Rating');
-	} else {
-		for (var i = 0; i < stars.length; i++) {
-			if (AC) {
-				jQuery(stars[i]).addClass("star-rating-hover");
-			} else {
-				jQuery(stars[i]).removeClass("star-rating-hover");
-			}
-			if (stars[i].children[0].innerHTML == optionId) {
-				AC = false;
-				tip.html(jQuery(stars[i]).find("a").attr("title") || "");
-			}
-		}
-	}
-	return false;
-}
+        function hoverOption(option) {
+            tip.text(option.data("option-value"));
+            var options = field.find(".slie-star");
+            options.removeClass("slie-star-hover");
 
-function updateRateOverOff(cfId) {
-	var stars = jQuery(".rater-" + cfId);
-	var tip = jQuery(".rating-tip-" + cfId);
-	var voted = -1;
-	
-	for (var i = 0; i < stars.length; i++) {
-		jQuery(stars[i]).removeClass("star-rating-hover");
-		if(jQuery(stars[i]).hasClass("star-rating-on")){
-			voted = i;
-		}
-	}
+            if (option.hasClass("slie-star-clear")) {
+                return;
+            }
 
-	if(voted > -1){
-		tip.html(jQuery(stars[voted]).find("a").attr("title") || "");
-	} else {
-		tip.html("");
-	}
+            for (var i = 0; i < options.length; i++) {
+                var o = $(options[i]);
+                o.addClass("slie-star-hover");
+                if (o.is(option)) {
+                    break;
+                }
+            }
+        }
 
-	return false;
-}
+        function hoverOutOption() {
+            var options = field.find(".slie-star");
+            options.removeClass("slie-star-hover");
 
-function updateRate(optionId, cfId) {
-	jQuery('input[name=' + cfId + ']')[0].value = optionId;
-	var stars = jQuery(".rater-" + cfId);
-	var AC = true;
-	
-	if (optionId == -1) {
-		AC = false;
-	}
-	for (var i = 0; i < stars.length; i++) {
-		if (AC) {
-			jQuery(stars[i]).addClass("star-rating-on");
-		} else {
-			jQuery(stars[i]).removeClass("star-rating-on");
-		}
-		if (stars[i].children[0].innerHTML == optionId) {
-			AC = false;
-		}
-	}
-	return false;
-}
+            var selected = field.find(".slie-star.slie-star-selected");
+            var tipText = "";
+            if (selected.length > 0) {
+                tipText = selected.data("option-value");
+            }
+            tip.text(tipText);
+        }
+
+        function selectOption(option) {
+            var options = field.find(".slie-star");
+            options.removeClass("slie-star-gold");
+            options.removeClass("slie-star-selected");
+
+            if (!option.hasClass("slie-star-clear")) {
+                for (var i = 0; i < options.length; i++) {
+                    var o = $(options[i]);
+                    o.addClass("slie-star-gold");
+                    if (o.is(option)) {
+                        o.addClass("slie-star-selected");
+                        break;
+                    }
+                }
+            }
+
+            field.find(".slie-rating-input").val(option.data("option-id"));
+        }
+
+        field.find(".slie-star").click(function () {
+            selectOption($(this));
+        });
+
+        field.find(".slie-star").hover(function () {
+            hoverOption($(this));
+        }, function () {
+            hoverOutOption();
+        });
+
+        field.find(".slie-rating-input").change(function () {
+            var value = $(this).val();
+            var option;
+
+            if (value) {
+                option = field.find(".slie-star[data-option-id='" + value + "']")
+            }
+
+            if (!option || option.length === 0) {
+                option = field.find(".slie-star.slie-star-clear");
+            }
+
+            selectOption(option);
+        });
+    }
+
+    function initRatingFields($context) {
+        var fields = $(".slie-rating-field.editable:not(.init)", $context);
+        fields.each(function () {
+            initRatingField($(this));
+        });
+    }
+
+    AJS.toInit(function ($context) {
+        initRatingFields($context[0]);
+    });
+
+    JIRA.bind(JIRA.Events.NEW_CONTENT_ADDED, function (e, context) {
+        initRatingFields(context);
+    });
+})(AJS.$);

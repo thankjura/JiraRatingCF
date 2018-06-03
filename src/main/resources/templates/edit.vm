@@ -1,38 +1,26 @@
 #disable_html_escaping()
 #customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
-    $webResourceManager.requireResourcesForContext("ru.slie.jira.plugins.customfields")
-    <div class="star-rating-editable">
-        <div class="rating-cancel">
-            <a title="Cancel Rating" onmouseover="updateRateOver(-1, '${customField.id}')" onmouseout="updateRateOverOff('${customField.id}')" onClick="updateRate(-1, '${customField.id}')"></a>
-        </div>
-        
-        #set ($attr_start = "")
-        #foreach ($option in $configs.options)
-            #if ($value && $value == $option.optionId.toString())
-            	#set ($attr_start = "star-rating-on")
-            #end
-        #end
-        
-        #foreach ($option in $configs.options)
-            #if(!$option.disabled || $option.disabled == false || ($value && $value == $option.optionId.toString()))
-                <div class="star-rating rater-${customField.id} radio-rating $attr_start" id="${customField.id}-${velocityCount}">
-                    <a title="$cfValueEncoder.encodeForHtml($option.value)" onmouseover="updateRateOver($option.optionId.toString(), '${customField.id}')" onmouseout="updateRateOverOff('${customField.id}')" onclick="updateRate($option.optionId.toString(), '${customField.id}')">
-                    	$option.optionId.toString()
-                    </a>
-                </div>
+    <div class="slie-rating-field editable">
+        <div class="slie-rating-edit">
+            #set ($haveSelected = false)
+            #foreach ($option in $configs.options)
                 #if ($value && $value == $option.optionId.toString())
-                	#set ($attr_start = "")
+                    #set ($haveSelected = true)
+                    #set ($selectedValue = $textutils.htmlEncode($!option.getValue()))
                 #end
             #end
-        #end
-        
-        <span class="rating-tip rating-tip-${customField.id}"></span>
-        
+
+            #foreach ($option in $configs.options)
+                #if(!$option.disabled || $option.disabled == false || ($value && $value == $option.optionId.toString()))
+                    <div class="slie-star#if($haveSelected) slie-star-gold#end#if($value && $value == $option.optionId.toString()) slie-star-selected#end" data-option-id="$option.optionId" data-option-value="$textutils.htmlEncode($!option.getValue())"></div>
+                    #if ($value && $value == $option.optionId.toString())
+                        #set ($haveSelected = false)
+                    #end
+                #end
+            #end
+            <div class="slie-star slie-star-clear" data-option-id="" data-option-value="$i18n.getText("rating-customfield.vm.action.clear")"></div>
+        </div>
+        <div class="slie-rating-tip">$!selectedValue</div>
+        <input class="slie-rating-input" name="${customField.id}" id="${customField.id}" type="text" value="$value" style="display: none;" />
     </div>
-    #if (!$value)
-    	#set ($value = "-1")
-    #elseif ($value == "99999999999")
-    	#set ($value = "-1")
-    #end
-    <input class="radio-rating" name="${customField.id}" type="text" value="$value" style="display: none;" />
 #customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)

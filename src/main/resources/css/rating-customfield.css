@@ -1,71 +1,62 @@
-div.star-rating, div.rating-cancel {
-	float: left;
-	width: 17px;
-	height: 15px;
-	text-indent: -999em;
-	display: block;
-	background: transparent;
-	overflow: hidden;
-}
+.slie-rating-field {
+  overflow: visible;
+  display: inline-block;
+  vertical-align: middle;
+  float: left; }
+  .slie-rating-field .slie-rating-edit {
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #ccc;
+    border-radius: 3px;
+    padding: 5px;
+    display: inline-block;
+    float: left; }
+    .slie-rating-field .slie-rating-edit .slie-star {
+      cursor: pointer; }
+  .slie-rating-field .slie-star {
+    width: 20px;
+    height: 20px;
+    float: left;
+    box-sizing: border-box;
+    background: url("images/icons/star-silver.png") no-repeat center center;
+    background-size: cover; }
+    .slie-rating-field .slie-star.slie-star-gold {
+      background-image: url("images/icons/star-gold.png") !important; }
+    .slie-rating-field .slie-star.slie-star-hover {
+      background-image: url("images/icons/star-red.png"); }
+    .slie-rating-field .slie-star.slie-star-clear {
+      background-image: url("images/icons/clear.png");
+      margin-left: 5px; }
+      .slie-rating-field .slie-star.slie-star-clear:hover {
+        background-image: url("images/icons/clear-active.png"); }
+  .slie-rating-field .slie-rating-tip {
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 5px;
+    padding-left: 10px; }
+  .slie-rating-field .slie-rating-input {
+    display: none !important; }
 
-div.star-rating a, div.rating-cancel a {
-	display: block;
-	width: 16px;
-	height: 16px;
-	background-position: 0 0px;
-	border: 0;
-	cursor: pointer;
-}
+.type-rating-custom-field.editable-field.active {
+  box-shadow: none !important;
+  display: block !important;
+  float: left;
+  box-sizing: border-box;
+  border: 0 !important; }
+  .type-rating-custom-field.editable-field.active form.aui {
+    min-height: 24px; }
+    .type-rating-custom-field.editable-field.active form.aui .slie-rating-field .slie-rating-edit {
+      padding: 2px 5px;
+      border-bottom-right-radius: 0; }
+    .type-rating-custom-field.editable-field.active form.aui .slie-rating-field .slie-rating-tip {
+      position: absolute;
+      display: inline-block;
+      left: 100%;
+      width: 100%;
+      top: 0;
+      vertical-align: middle;
+      padding-top: 2px; }
+    .type-rating-custom-field.editable-field.active form.aui .save-options {
+      margin-top: 1px;
+      right: -1px; }
 
-div.star-rating, div.star-rating a {
-	background:
-		url("../../download/resources/ru.slie.jira.plugins.customfield:resources/images/star.gif")
-		no-repeat 0 0px;
-}
-
-div.star-rating-hover a {
-	background-position: 0 -32px;
-}
-
-div.star-rating-on a {
-	background-position: 0 -16px !important;
-}
-
-div.star-rating-readonly {
-	padding: 1px 0px 1px 0px;
-	height: auto;
-	overflow: hidden;
-	position: static;
-}
-
-div.star-rating-readonly a {
-	cursor: default !important;
-}
-
-div.star-rating {
-	background: transparent !important;
-	overflow: hidden !important;
-}
-
-div.rating-cancel, div.rating-cancel a {
-	background:
-		url("../../download/resources/ru.slie.jira.plugins.customfield:resources/images/delete.gif")
-		no-repeat 0 0px;
-}
-
-div.rating-cancel a:hover {
-	cursor: pointer;
-	background-position: 0 -16px;
-}
-
-div.star-rating-editable {
-	margin-top: 5px;
-	padding: 1px 0px 1px 0px;
-	height: auto;
-	overflow: hidden;
-	position: static;
-}
-
-span.rating-tip {
-	margin: 0 0 0 12px;
-}
+/*# sourceMappingURL=rating-customfield.css.map */

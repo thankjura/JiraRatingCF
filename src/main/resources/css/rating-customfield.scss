@@ -1,0 +1,92 @@
+.slie-rating-field {
+  overflow: visible;
+  display: inline-block;
+  vertical-align: middle;
+  float: left;
+
+  .slie-rating-edit {
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #ccc;
+    border-radius: 3px;
+    padding: 5px;
+    display: inline-block;
+    float: left;
+
+    .slie-star {
+      cursor: pointer;
+    }
+  }
+
+  .slie-star {
+    width: 20px;
+    height: 20px;
+    float: left;
+    box-sizing: border-box;
+    background: url("images/icons/star-silver.png") no-repeat center center;
+    background-size: cover;
+
+    &.slie-star-gold {
+      background-image: url("images/icons/star-gold.png")!important;
+    }
+
+    &.slie-star-hover {
+      background-image: url("images/icons/star-red.png");
+    }
+
+    &.slie-star-clear {
+      background-image: url("images/icons/clear.png");
+      margin-left: 5px;
+
+      &:hover {
+        background-image: url("images/icons/clear-active.png");
+      }
+    }
+  }
+
+  .slie-rating-tip {
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 5px;
+    padding-left: 10px;
+  }
+
+  .slie-rating-input {
+    display: none!important;
+  }
+}
+
+.type-rating-custom-field.editable-field {
+  &.active {
+    box-shadow: none!important;
+    display: block!important;
+    float: left;
+    box-sizing: border-box;
+    border: 0!important;
+
+    form.aui {
+      min-height: 24px;
+
+      .slie-rating-field {
+        .slie-rating-edit {
+          padding: 2px 5px;
+          border-bottom-right-radius: 0;
+        }
+
+        .slie-rating-tip {
+          position: absolute;
+          display: inline-block;
+          left: 100%;
+          width: 100%;
+          top: 0;
+          vertical-align: middle;
+          padding-top: 2px;
+        }
+      }
+
+.save-options {
+        margin-top: 1px;
+        right: -1px;
+      }
+    }
+  }
+}
