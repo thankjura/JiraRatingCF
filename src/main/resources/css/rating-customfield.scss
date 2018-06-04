@@ -6,7 +6,6 @@
 
   .slie-rating-edit {
     overflow: hidden;
-    box-shadow: 0 0 0 1px #ccc;
     border-radius: 3px;
     padding: 5px;
     display: inline-block;
@@ -70,6 +69,7 @@
         .slie-rating-edit {
           padding: 2px 5px;
           border-bottom-right-radius: 0;
+          box-shadow: 0 0 0 1px #ccc;
         }
 
         .slie-rating-tip {

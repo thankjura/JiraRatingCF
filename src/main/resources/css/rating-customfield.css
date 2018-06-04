@@ -5,7 +5,6 @@
   float: left; }
   .slie-rating-field .slie-rating-edit {
     overflow: hidden;
-    box-shadow: 0 0 0 1px #ccc;
     border-radius: 3px;
     padding: 5px;
     display: inline-block;
@@ -46,7 +45,8 @@
     min-height: 24px; }
     .type-rating-custom-field.editable-field.active form.aui .slie-rating-field .slie-rating-edit {
       padding: 2px 5px;
-      border-bottom-right-radius: 0; }
+      border-bottom-right-radius: 0;
+      box-shadow: 0 0 0 1px #ccc; }
     .type-rating-custom-field.editable-field.active form.aui .slie-rating-field .slie-rating-tip {
       position: absolute;
       display: inline-block;

@@ -12,6 +12,7 @@ import com.atlassian.jira.util.JiraComponentLocator;
  * To change this template use File | Settings | File Templates.
  */
 public class RatingSearcher extends SelectSearcher {
+    // TODO: implements > and < operators
     public RatingSearcher() {
         super(JiraComponentFactory.getInstance(), new JiraComponentLocator());
     }
