@@ -17,8 +17,8 @@
   }
 
   .slie-star {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     float: left;
     box-sizing: border-box;
     background: url("images/icons/star-silver.png") no-repeat center center;
@@ -61,6 +61,7 @@
     float: left;
     box-sizing: border-box;
     border: 0!important;
+    padding-bottom: 0!important;
 
     form.aui {
       min-height: 24px;
@@ -83,7 +84,7 @@
         }
       }
 
-.save-options {
+      .save-options {
         margin-top: 1px;
         right: -1px;
       }

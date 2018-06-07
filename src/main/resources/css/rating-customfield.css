@@ -12,8 +12,8 @@
     .slie-rating-field .slie-rating-edit .slie-star {
       cursor: pointer; }
   .slie-rating-field .slie-star {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     float: left;
     box-sizing: border-box;
     background: url("images/icons/star-silver.png") no-repeat center center;
@@ -40,7 +40,8 @@
   display: block !important;
   float: left;
   box-sizing: border-box;
-  border: 0 !important; }
+  border: 0 !important;
+  padding-bottom: 0 !important; }
   .type-rating-custom-field.editable-field.active form.aui {
     min-height: 24px; }
     .type-rating-custom-field.editable-field.active form.aui .slie-rating-field .slie-rating-edit {
