@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.slie.jira.plugins</groupId>
     <artifactId>customfield</artifactId>
-    <version>2.3.1</version>
+    <version>2.3.2</version>
     <organization>
         <name>Oboz Yury</name>
         <url>mailto:me@slie.ru</url>
@@ -77,7 +77,7 @@
         </plugins>
     </build>
     <properties>
-        <jira.version>7.10.0</jira.version>
+        <jira.version>8.0.0</jira.version>
         <amps.version>6.3.15</amps.version>
         <atlassian.spring.scanner.version>2.0.1</atlassian.spring.scanner.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>

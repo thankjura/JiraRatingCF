@@ -1,7 +1,7 @@
 (function($) {
     function initRatingField(field) {
         field.addClass("init");
-        field.disableSelection();
+        field.css('user-select', 'none');
         var tip = field.find(".slie-rating-tip");
 
         function hoverOption(option) {
