@@ -1,3 +1,0 @@
-#if ($value)
-    $cfValueEncoder.encodeForHtml($!value.getValue())
-#end

@@ -1,0 +1,4 @@
+#* @vtlvariable name="value" type="com.atlassian.jira.issue.customfields.option.Option" *#
+#if ($value)
+    $cfValueEncoder.encodeForHtml($!value.getValue())
+#end

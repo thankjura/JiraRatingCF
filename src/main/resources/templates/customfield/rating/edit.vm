@@ -1,0 +1,32 @@
+#* @vtlvariable name="i18n" type="com.atlassian.jira.util.I18nHelper" *#
+#* @vtlvariable name="options" type="java.util.List<com.atlassian.jira.issue.customfields.option.Option>" *#
+#* @vtlvariable name="fieldLayoutItem" type="com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem" *#
+#* @vtlvariable name="textutils" type="com.opensymphony.util.TextUtils" *#
+#* @vtlvariable name="customField" type="com.atlassian.jira.issue.fields.CustomField" *#
+#* @vtlvariable name="value" type="java.lang.String" *#
+#disable_html_escaping()
+#customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
+    <div class="slie-rating-field editable">
+        <div class="slie-rating-edit">
+            #set ($haveSelected = false)
+            #foreach ($option in $options)
+                #if ($option.optionId.toString() == $value)
+                    #set ($haveSelected = true)
+                    #set ($selectedValue = $textutils.htmlEncode($!option.getValue()))
+                #end
+            #end
+
+            #foreach ($option in $options)
+                #if(!$option.disabled || $option.disabled == false || ($option.optionId.toString() == $value))
+                    <div class="slie-star#if($haveSelected) slie-star-gold#end#if($option.optionId.toString() == $value) slie-star-selected#end" data-option-id="$option.optionId" data-option-value="$textutils.htmlEncode($!option.getValue())"></div>
+                    #if ($option.optionId.toString() == $value)
+                        #set ($haveSelected = false)
+                    #end
+                #end
+            #end
+            <div class="slie-star slie-star-clear" data-option-id="" data-option-value="$i18n.getText("rating.vm.action.clear")"></div>
+        </div>
+        <div class="slie-rating-tip">$!selectedValue</div>
+        <input class="slie-rating-input" name="${customField.id}" id="${customField.id}" type="text" value="$!value" style="display: none;" />
+    </div>
+#customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)

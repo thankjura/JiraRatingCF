@@ -1,0 +1,51 @@
+#* @vtlvariable name="showEmptyField" type="java.lang.Boolean" *#
+#* @vtlvariable name="saved" type="java.lang.Boolean" *#
+#* @vtlvariable name="baseUrl" type="java.lang.String" *#
+#* @vtlvariable name="webResourceManager" type="com.atlassian.plugin.webresource.WebResourceManager" *#
+#* @vtlvariable name="i18n" type="com.atlassian.jira.util.I18nHelper" *#
+<html>
+<head>
+    <title>$i18n.getText("rating.vm.settings.label")</title>
+    <meta name="decorator" content="atl.admin" />
+    <meta name="admin.active.section" content="admin_plugins_menu/rating-customfield-section"/>
+    <meta name="admin.active.tab" content="graty-main-config"/>
+    $webResourceManager.requireResource("ru.slie.jira.plugins.customfield:rating-admin-resources")
+    <meta name="application-base-url" content="$baseUrl">
+</head>
+<body>
+<div class="rating-panel-main">
+    <header class="aui-page-header">
+        <div class="aui-page-header-inner">
+            <div class="aui-page-header-main">
+                <h2>$i18n.getText("rating.vm.settings.label")</h2>
+            </div>
+        </div>
+    </header>
+    <form class="aui" method="post">
+        <div class="form-body">
+            <div class="aui-item">
+                <fieldset class="group">
+                    <legend><span>$i18n.getText("rating.vm.field.show_empty_field.label")</span></legend>
+                    <div class="checkbox">
+                        <input class="checkbox" type="checkbox" name="showEmptyField" value="yes" id="showEmptyField"#if($showEmptyField) checked#end>
+                        <label for="showEmptyField">$i18n.getText("rating.vm.field.show_empty_field.yes")</label>
+                    </div>
+                </fieldset>
+                <div class="buttons-container form-footer">
+                    <div class="buttons">
+                        <input class="aui-button" name="update" type="submit" value="$i18n.getText("rating.vm.action.update")">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    #if ($saved)
+        <script>
+            AJS.toInit(function () {
+                JIRA.Messages.showSuccessMsg('$i18n.getText("rating.vm.text.saved_description")');
+            });
+        </script>
+    #end
+</div>
+</body>
+</html>

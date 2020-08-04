@@ -12,22 +12,24 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.rest.json.beans.JiraBaseUrls;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import org.ofbiz.core.entity.GenericValue;
-import org.springframework.beans.factory.annotation.Autowired;
+import ru.slie.jira.plugins.customfields.admin.RatingCustomFieldSettings;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class RatingCustomField extends SelectCFType {
-	@ComponentImport private final OptionsManager optionsManager;
+	private final OptionsManager optionsManager;
+	private final RatingCustomFieldSettings settings;
 
-	@Autowired
 	public RatingCustomField(@ComponentImport CustomFieldValuePersister customFieldValuePersister,
-							 OptionsManager optionsManager,
+							 @ComponentImport OptionsManager optionsManager,
 							 @ComponentImport GenericConfigManager genericConfigManager,
-							 @ComponentImport JiraBaseUrls jiraBaseUrls) {
+							 @ComponentImport JiraBaseUrls jiraBaseUrls,
+							 RatingCustomFieldSettings settings) {
 		super(customFieldValuePersister, optionsManager, genericConfigManager, jiraBaseUrls);
 		this.optionsManager = optionsManager;
+		this.settings = settings;
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class RatingCustomField extends SelectCFType {
 	@Override
 	public Option getValueFromIssue(final CustomField field, final Issue issue) {
 		final Option option = super.getValueFromIssue(field, issue);
-		if (option == null) {
+		if (option == null && settings.isShowEmptyField()) {
 			return new Option() {
 				@Override
 				public Long getOptionId() {

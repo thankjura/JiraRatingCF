@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.slie.jira.plugins</groupId>
     <artifactId>customfield</artifactId>
-    <version>2.3.2</version>
+    <version>3.0.0</version>
     <organization>
         <name>Oboz Yury</name>
         <url>mailto:me@slie.ru</url>
@@ -34,7 +34,19 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.1.6.RELEASE</version>
+            <version>5.0.10.RELEASE</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.activeobjects</groupId>
+            <artifactId>activeobjects-plugin</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.templaterenderer</groupId>
+            <artifactId>atlassian-template-renderer-api</artifactId>
+            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -42,18 +54,17 @@
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-jira-plugin</artifactId>
+                <artifactId>jira-maven-plugin</artifactId>
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
                     <productDataVersion>${jira.version}</productDataVersion>
                     <enableQuickReload>true</enableQuickReload>
-                    <enableFastdev>false</enableFastdev>
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
                         <Export-Package>ru.slie.jira.plugins.customfields,</Export-Package>
-                        <Import-Package>org.springframework.osgi.*;resolution:="optional", org.eclipse.gemini.blueprint.*;resolution:="optional", *</Import-Package>
+                        <Import-Package>*</Import-Package>
                         <Spring-Context>*</Spring-Context>
                     </instructions>
                 </configuration>
@@ -77,12 +88,13 @@
         </plugins>
     </build>
     <properties>
-        <jira.version>8.0.0</jira.version>
-        <amps.version>6.3.15</amps.version>
-        <atlassian.spring.scanner.version>2.0.1</atlassian.spring.scanner.version>
+        <jira.version>8.5.0</jira.version>
+        <amps.version>8.1.0</amps.version>
+        <atlassian.spring.scanner.version>2.1.7</atlassian.spring.scanner.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <scm>
         <connection>scm:git:https://thankjura@bitbucket.org/thankjura/rating-customfield.git</connection>
