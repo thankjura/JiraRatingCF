@@ -27,6 +27,6 @@
             <div class="slie-star slie-star-clear" data-option-id="" data-option-value="$i18n.getText("rating.vm.action.clear")"></div>
         </div>
         <div class="slie-rating-tip">$!selectedValue</div>
-        <input class="slie-rating-input" name="${customField.id}" id="${customField.id}" type="text" value="$!value" style="display: none;" />
+        <input class="slie-rating-input" name="${customField.id}" id="${customField.id}" type="text" value="#if("$value" != "-1")$!value#end" style="display: none;" />
     </div>
 #customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)

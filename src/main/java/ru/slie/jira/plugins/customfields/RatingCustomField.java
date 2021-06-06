@@ -62,7 +62,7 @@ public class RatingCustomField extends SelectCFType {
 
 				@Override
 				public String getValue() {
-					return "None";
+					return "";
 				}
 
 				@Override
@@ -114,8 +114,34 @@ public class RatingCustomField extends SelectCFType {
 				@Override
 				public void store() {
 				}
+
+				@Override
+				public boolean equals(Object v2) {
+					return v2 == null;
+				}
 			};
 		}
 		return option;
+	}
+
+	public String getStringFromSingularObject(Option optionObject) {
+		return (optionObject == null || optionObject.getOptionId() == null ||optionObject.getOptionId() < 0) ? null : optionObject.getOptionId().toString();
+	}
+
+	public String getChangelogString(CustomField field, Option value) {
+		return (value == null || value.getOptionId() == null || value.getOptionId() < 0) ? null : value.getValue();
+	}
+
+
+	public boolean valuesEqual(Option v1, Option v2) {
+		if (v1 != null && (v1.getOptionId() == null || v1.getOptionId() < 0)) {
+			v1 = null;
+		}
+
+		if (v2 != null && (v2.getOptionId() == null || v2.getOptionId() < 0)) {
+			v2 = null;
+		}
+
+		return super.valuesEqual(v1, v2);
 	}
 }

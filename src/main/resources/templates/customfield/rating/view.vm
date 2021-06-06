@@ -1,3 +1,6 @@
+#* @vtlvariable name="textutils" type="com.opensymphony.util.TextUtils" *#
+#* @vtlvariable name="options" type="java.util.List<com.atlassian.jira.issue.customfields.option.Option>" *#
+#* @vtlvariable name="value" type="com.atlassian.jira.issue.customfields.option.Option" *#
 #if ($value)
     #if (${displayParameters.excel_view})
         $textutils.br($textutils.htmlEncode($!value.getValue(), false))
